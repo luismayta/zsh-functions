@@ -21,7 +21,15 @@ function ripgrep::install {
     fi
 }
 
+function fzf::install {
+    if [ -x "$(command which brew)" ]; then
+        brew install fzf
+    fi
+}
+
 if ! type -p rg > /dev/null; then ripgrep::install; fi
+if ! type -p fzf > /dev/null; then fzf::install; fi
+
 
 if [ -x "$(command which rg)" ]; then
     # Setting rg as the default source for fzf
