@@ -79,7 +79,7 @@ if [ -x "$(command which fzf)" ]; then
 
         if [[ -n "${file}" ]]
         then
-            vim "${file}" +"${line}"
+            vim "+${line}" "${file}"
         fi
     }
 fi
