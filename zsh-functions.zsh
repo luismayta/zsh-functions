@@ -15,6 +15,13 @@ source "${plugin_dir}"/src/helpers/messages.zsh
 # shellcheck source=/dev/null
 source "${plugin_dir}"/src/helpers/tools.zsh
 
+function ripgrep::install {
+    if [ -x "$(command which brew)" ]; then
+        brew install ripgrep
+    fi
+}
+
+if ! type -p rg > /dev/null; then ripgrep::install; fi
 
 if [ -x "$(command which rg)" ]; then
     # Setting rg as the default source for fzf
