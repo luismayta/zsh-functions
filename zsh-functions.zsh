@@ -15,12 +15,14 @@ source "${plugin_dir}"/src/helpers/messages.zsh
 # shellcheck source=/dev/null
 source "${plugin_dir}"/src/helpers/tools.zsh
 
+# ripgrep::install - install ripgrep
 function ripgrep::install {
     if [ -x "$(command which brew)" ]; then
         brew install ripgrep
     fi
 }
 
+# fzf::install - install fzf
 function fzf::install {
     if [ -x "$(command which brew)" ]; then
         brew install fzf
@@ -38,6 +40,16 @@ if [ -x "$(command which rg)" ]; then
     # Apply the command to CTRL-T as well
     export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 fi
+
+# ip - show ip of internet
+function ip {
+    dig +short myip.opendns.com @resolver1.opendns.com
+}
+
+# localip - show ip of internet
+function localip {
+    ipconfig getifaddr en0
+}
 
 
 if [ -x "$(command which fzf)" ]; then
