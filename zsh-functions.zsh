@@ -7,24 +7,19 @@
 # Authors:
 #   Luis Mayta <slovacus@gmail.com>
 #
-plugin_dir=$(dirname "${0}":A)
-
-# shellcheck source=/dev/null
-source "${plugin_dir}"/src/helpers/messages.zsh
-
-# shellcheck source=/dev/null
-source "${plugin_dir}"/src/helpers/tools.zsh
+PLUGIN_D=$(dirname "$0")
+export PATH="${PATH}:${PLUGIN_D}/bin"
 
 # ripgrep::install - install ripgrep
 function ripgrep::install {
-    if [ -x "$(command which brew)" ]; then
+    if type -p brew > /dev/null; then
         brew install ripgrep
     fi
 }
 
 # fzf::install - install fzf
 function fzf::install {
-    if [ -x "$(command which brew)" ]; then
+    if type -p brew > /dev/null; then
         brew install fzf
     fi
 }
@@ -33,7 +28,7 @@ if ! type -p rg > /dev/null; then ripgrep::install; fi
 if ! type -p fzf > /dev/null; then fzf::install; fi
 
 
-if [ -x "$(command which rg)" ]; then
+if type -p rg > /dev/null; then
     # Setting rg as the default source for fzf
     export FZF_DEFAULT_COMMAND='rg --files'
 
@@ -51,8 +46,7 @@ function localip {
     ipconfig getifaddr en0
 }
 
-
-if [ -x "$(command which fzf)" ]; then
+if type -p fzf > /dev/null; then
 
     # fo [FUZZY PATTERN] - Open the selected file with the default editor
     #   - Bypass fuzzy finder if there's only one match (--select-1)
