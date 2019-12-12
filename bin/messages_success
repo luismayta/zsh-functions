@@ -1,0 +1,6 @@
+#!/bin/sh
+
+CLEAR='\033[0m'
+GREEN="\033[0;32m"
+
+printf "${CLEAR}${GREEN}Success: %s ${CLEAR}\n" "$1";
