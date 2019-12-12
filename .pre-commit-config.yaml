@@ -11,7 +11,7 @@ repos:
     rev: 1.0.5
     hooks:
       - id: shell-lint
-        exclude: (^provision/script/wait-for-it.sh$|^provision/git/hooks/prepare-commit-msg$)
+        exclude: (^provision/script/wait-for-it.sh$|^provision/git/hooks/prepare-commit-msg$|^bin/*$)
         args:
           - --exclude=SC1072,SC1073,SC2068
   - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
