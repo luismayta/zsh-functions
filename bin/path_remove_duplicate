@@ -1,4 +1,4 @@
-#!/usr/bin/env ksh
+#!/usr/bin/env zsh
 
 # Remove duplicate entries from PATH:
 echo "${PATH}" | awk -v RS=':' -v ORS=":" '!a[$1]++{if (NR > 1) printf ORS; printf $a[$1]}'
