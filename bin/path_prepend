@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env ksh
 
 [ -e "${1}" ] && export PATH="${1}:${PATH}"
 path="$(path_remove_duplicate)"
