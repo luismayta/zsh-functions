@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ -e "${1}" ] && export PATH="${PATH}:$1"
+path="$(path_remove_duplicate)"
+export PATH=${path}
