@@ -10,6 +10,22 @@
 PLUGIN_D=$(dirname "$0")
 export PATH="${PATH}:${PLUGIN_D}/bin"
 
+# axel::install - install axel download mananger
+function axel::install {
+    if type -p brew > /dev/null; then
+        message_info "Install Axel"
+        brew install axel
+    fi
+}
+
+# download - Implement axel to settings chunk 20
+function download {
+    if ! type -p axel > /dev/null; then axel::install; fi
+    local filename
+    filename="${1}"
+    axel -n 20 -av "${filename}"
+}
+
 # ripgrep::install - install ripgrep
 function ripgrep::install {
     if type -p brew > /dev/null; then
@@ -24,6 +40,7 @@ function fzf::install {
     fi
 }
 
+if ! type -p axel > /dev/null; then axel::install; fi
 if ! type -p rg > /dev/null; then ripgrep::install; fi
 if ! type -p fzf > /dev/null; then fzf::install; fi
 
@@ -98,8 +115,7 @@ if type -p fzf > /dev/null; then
 
         read -r file line <<<"$(rg --no-heading --line-number $@ | fzf -0 -1 | awk -F: '{print $1, $2}')"
 
-        if [[ -n "${file}" ]]
-        then
+        if [ -n "${file}" ]; then
             vim "+${line}" "${file}"
         fi
     }
