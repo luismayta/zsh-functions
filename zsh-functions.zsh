@@ -7,8 +7,9 @@
 # Authors:
 #   Luis Mayta <slovacus@gmail.com>
 #
-PLUGIN_D=$(dirname "$0")
-export PATH="${PATH}:${PLUGIN_D}/bin"
+#
+ZSH_FUNCTIONS_PLUGIN_D=$(dirname "$0")
+export PATH="${ZSH_FUNCTIONS_PLUGIN_D}/bin:${PATH}"
 
 # axel::install - install axel download mananger
 function axel::install {
