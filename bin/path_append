@@ -1,5 +1,3 @@
 #!/usr/bin/env zsh
 
-[ -e "${1}" ] && export PATH="${PATH}:$1"
-path="$(path_remove_duplicate)"
-export PATH=${path}
+[ -e "${1}" ] && export PATH="${PATH}:${1}" && path_remove_duplicate
