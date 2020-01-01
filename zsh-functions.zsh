@@ -11,6 +11,29 @@
 ZSH_FUNCTIONS_PLUGIN_D=$(dirname "$0")
 export PATH="${ZSH_FUNCTIONS_PLUGIN_D}/bin:${PATH}"
 
+# cross::os functions for osx and linux
+function cross::os {
+
+    case "${OSTYPE}" in
+    linux*)
+        if type -p xclip > /dev/null; then
+            alias pbcopy="xclip -selection clipboard"
+            alias pbpaste="xclip -selection clipboard -o"
+        fi
+
+        if type -p xsel > /dev/null; then
+            alias pbcopy="xsel --clipboard --input"
+            alias pbpaste="xsel --clipboard --output"
+        fi
+
+        if [ -e /usr/bin/xdg-open ]; then
+            alias open="xdg-open"
+        fi
+      ;;
+    esac
+
+}
+
 # axel::install - install axel download mananger
 function axel::install {
     if type -p brew > /dev/null; then
@@ -121,3 +144,5 @@ if type -p fzf > /dev/null; then
         fi
     }
 fi
+
+cross::os
