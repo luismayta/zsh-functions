@@ -16,6 +16,11 @@ function yarn::scripts {
     cat package.json | jq -e .scripts
 }
 
+# yarn::dependencies show packages of package.json
+function yarn::dependencies {
+    cat package.json | jq -e .dependencies
+}
+
 # cross::os functions for osx and linux
 function cross::os {
 
