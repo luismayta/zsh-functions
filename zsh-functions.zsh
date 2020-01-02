@@ -11,6 +11,11 @@
 ZSH_FUNCTIONS_PLUGIN_D=$(dirname "$0")
 export PATH="${ZSH_FUNCTIONS_PLUGIN_D}/bin:${PATH}"
 
+# yarn::scripts show script of package.json
+function yarn::scripts {
+    cat package.json | jq -e .scripts
+}
+
 # cross::os functions for osx and linux
 function cross::os {
 
@@ -34,11 +39,19 @@ function cross::os {
 
 }
 
-# axel::install - install axel download mananger
+# axel::install - install axel download manager
 function axel::install {
     if type -p brew > /dev/null; then
         message_info "Install Axel"
         brew install axel
+    fi
+}
+
+# jq::install - install jq
+function jq::install {
+    if type -p brew > /dev/null; then
+        message_info "Install JQ"
+        brew install jq
     fi
 }
 
@@ -67,6 +80,7 @@ function fzf::install {
 if ! type -p axel > /dev/null; then axel::install; fi
 if ! type -p rg > /dev/null; then ripgrep::install; fi
 if ! type -p fzf > /dev/null; then fzf::install; fi
+if ! type -p jq > /dev/null; then jq::install; fi
 
 
 if type -p rg > /dev/null; then
