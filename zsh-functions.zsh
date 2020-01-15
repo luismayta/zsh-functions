@@ -8,12 +8,15 @@
 #   Luis Mayta <slovacus@gmail.com>
 #
 #
-FUNCTIONS_PLUGIN_DIR="$(dirname "${0}":A)"
-FUNCTIONS_SOURCE_PATH="${FUNCTION_PLUGIN_DIR}"/src
+FUNCTIONS_PLUGIN_DIR="$(dirname "${0}")"
+FUNCTIONS_SOURCE_PATH="${FUNCTIONS_PLUGIN_DIR}"/src
 
 export PATH="${FUNCTIONS_PLUGIN_DIR}/bin:${PATH}"
 
 FUNCTIONS_MESSAGE_BREW="Please install brew or use antibody bundle luismayta/zsh-brew branch:develop"
+
+# shellcheck source=/dev/null
+source "${FUNCTIONS_SOURCE_PATH}"/base.zsh
 
 # yarn::scripts show script of package.json
 function yarn::scripts {
@@ -30,19 +33,8 @@ function cross::os {
 
     case "${OSTYPE}" in
     linux*)
-        if type -p xclip > /dev/null; then
-            alias pbcopy="xclip -selection clipboard"
-            alias pbpaste="xclip -selection clipboard -o"
-        fi
-
-        if type -p xsel > /dev/null; then
-            alias pbcopy="xsel --clipboard --input"
-            alias pbpaste="xsel --clipboard --output"
-        fi
-
-        if [ -e /usr/bin/xdg-open ]; then
-            alias open="xdg-open"
-        fi
+        # shellcheck source=/dev/null
+        source "${FUNCTIONS_SOURCE_PATH}"/linux.zsh
     ;;
     esac
 
