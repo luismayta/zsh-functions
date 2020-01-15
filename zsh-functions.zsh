@@ -8,8 +8,12 @@
 #   Luis Mayta <slovacus@gmail.com>
 #
 #
-ZSH_FUNCTIONS_PLUGIN_D=$(dirname "$0")
-export PATH="${ZSH_FUNCTIONS_PLUGIN_D}/bin:${PATH}"
+FUNCTIONS_PLUGIN_DIR="$(dirname "${0}":A)"
+FUNCTIONS_SOURCE_PATH="${FUNCTION_PLUGIN_DIR}"/src
+
+export PATH="${FUNCTIONS_PLUGIN_DIR}/bin:${PATH}"
+
+FUNCTIONS_MESSAGE_BREW="Please install brew or use antibody bundle luismayta/zsh-brew branch:develop"
 
 # yarn::scripts show script of package.json
 function yarn::scripts {
@@ -39,25 +43,9 @@ function cross::os {
         if [ -e /usr/bin/xdg-open ]; then
             alias open="xdg-open"
         fi
-      ;;
+    ;;
     esac
 
-}
-
-# axel::install - install axel download manager
-function axel::install {
-    if type -p brew > /dev/null; then
-        message_info "Install Axel"
-        brew install axel
-    fi
-}
-
-# jq::install - install jq
-function jq::install {
-    if type -p brew > /dev/null; then
-        message_info "Install JQ"
-        brew install jq
-    fi
 }
 
 # download - Implement axel to settings chunk 20
@@ -67,26 +55,6 @@ function download {
     filename="${1}"
     axel -n 20 -av "${filename}"
 }
-
-# ripgrep::install - install ripgrep
-function ripgrep::install {
-    if type -p brew > /dev/null; then
-        brew install ripgrep
-    fi
-}
-
-# fzf::install - install fzf
-function fzf::install {
-    if type -p brew > /dev/null; then
-        brew install fzf
-    fi
-}
-
-if ! type -p axel > /dev/null; then axel::install; fi
-if ! type -p rg > /dev/null; then ripgrep::install; fi
-if ! type -p fzf > /dev/null; then fzf::install; fi
-if ! type -p jq > /dev/null; then jq::install; fi
-
 
 if type -p rg > /dev/null; then
     # Setting rg as the default source for fzf
