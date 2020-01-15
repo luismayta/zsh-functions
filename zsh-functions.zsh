@@ -18,6 +18,11 @@ FUNCTIONS_MESSAGE_BREW="Please install brew or use antibody bundle luismayta/zsh
 # shellcheck source=/dev/null
 source "${FUNCTIONS_SOURCE_PATH}"/base.zsh
 
+# copy pub key to buffer
+function pubkey {
+    more "${HOME}"/.ssh/id_rsa.pub | perl -pe 'chomp'  | pbcopy && message_info '====> Public key copied to pasteboard.'
+}
+
 # yarn::scripts show script of package.json
 function yarn::scripts {
     cat package.json | jq -e .scripts
