@@ -1,6 +1,50 @@
 #!/usr/bin/env ksh
 # -*- coding: utf-8 -*-
 
+# fkill [FUZZY PATTERN] - List process the selected process for kill
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+function fkill {
+    # Kill process
+    local pid
+    pid="$(ps -ef | sed 1d | fzf -m | awk '{print $2}')"
+
+    if [ "x${pid}" != "x" ]
+    then
+        echo ${pid} | xargs kill -${1:-9}
+    fi
+}
+
+# fa [FUZZY PATTERN] - Open the path to open
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+function fa {
+    # fa <dir> - Search dirs and cd to them - TODO: ignore node_modules + other things
+    local dir
+    dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+    cd "${dir}"
+}
+
+# fah [FUZZY PATTERN] - Open the files hidden
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+function fah {
+    # fah <dir> - Search dirs and cd to them (included hidden dirs)
+    local dir
+    dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "${dir}"
+}
+
+# fcs [FUZZY PATTERN] - Search commits hash
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+function fcs {
+    local commits commit
+    commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) && \
+    commit=$(echo "${commits}" | fzf --tac +s +m -e --ansi --reverse) && \
+    echo -n $(echo "${commit}" | sed "s/ .*//")
+}
+
 # fenv [FUZZY PATTERN] - Open the selected var env value
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
