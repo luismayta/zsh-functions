@@ -1,6 +1,17 @@
 #!/usr/bin/env ksh
 # -*- coding: utf-8 -*-
 
+function coreutils::install {
+    if ! type -p brew > /dev/null; then
+        message_warning "${FUNCTIONS_MESSAGE_BREW}"
+        return
+    fi
+    message_info "Install core utils"
+    brew install coreutils
+    message_success "Installed core utils"
+}
+
+
 # axel::install - install axel download manager
 function axel::install {
     if ! type -p brew > /dev/null; then
@@ -49,3 +60,5 @@ if ! type -p axel > /dev/null; then axel::install; fi
 if ! type -p rg > /dev/null; then ripgrep::install; fi
 if ! type -p fzf > /dev/null; then fzf::install; fi
 if ! type -p jq > /dev/null; then jq::install; fi
+if ! type -p ghead > /dev/null; then coreutils::install; fi
+
