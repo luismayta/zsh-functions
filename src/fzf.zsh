@@ -11,6 +11,17 @@ function fenv {
     echo $(echo -n ${out} | cut -d= -f2 | ghead -c -1 | pbcopy)
 }
 
+# falias [FUZZY PATTERN] - Search alias with fzf
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+function falias {
+    # Search alias by key or values
+    local out
+    out=$(alias | fzf)
+    echo $(echo -n ${out} | cut -d= -f2 | ghead -c -1 | pbcopy)
+}
+
+
 # fo [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
