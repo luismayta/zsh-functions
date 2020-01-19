@@ -1,6 +1,16 @@
 #!/usr/bin/env ksh
 # -*- coding: utf-8 -*-
 
+# fenv [FUZZY PATTERN] - Open the selected var env value
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+function fenv {
+    # Search env variables
+    local out
+    out=$(env | fzf)
+    echo $(echo -n ${out} | cut -d= -f2 | ghead -c -1 | pbcopy)
+}
+
 # fo [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
