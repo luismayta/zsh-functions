@@ -41,8 +41,13 @@ function fah {
 function fcs {
     local commits commit
     commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) && \
-    commit=$(echo "${commits}" | fzf --tac +s +m -e --ansi --reverse) && \
-    echo -n $(echo "${commit}" | sed "s/ .*//")
+    commit=$(echo "${commits}" | fzf --tac +s +m -e --ansi) && \
+    echo -n $(echo -n "${commit}" \
+                     | awk '{print $(1)}' \
+                     | perl -pe 'chomp' \
+                     | sed 's/\"//g' \
+                     | ghead -c -1 \
+                     | pbcopy)
 }
 
 # fenv [FUZZY PATTERN] - Open the selected var env value
@@ -52,7 +57,7 @@ function fenv {
     # Search env variables
     local out
     out=$(env | fzf)
-    echo $(echo -n ${out} | cut -d= -f2 | ghead -c -1 | pbcopy)
+    echo -n "$(echo -n ${out} | cut -d= -f2 | ghead -c -1 | pbcopy)"
 }
 
 # falias [FUZZY PATTERN] - Search alias with fzf
@@ -62,7 +67,7 @@ function falias {
     # Search alias by key or values
     local out
     out=$(alias | fzf)
-    echo $(echo -n ${out} | cut -d= -f2 | ghead -c -1 | pbcopy)
+    echo -n "$(echo -n ${out} | cut -d= -f2 | ghead -c -1 | pbcopy)"
 }
 
 
