@@ -72,5 +72,6 @@ if ! type -p axel > /dev/null; then axel::install; fi
 if ! type -p rg > /dev/null; then ripgrep::install; fi
 if ! type -p fzf > /dev/null; then fzf::install; fi
 if ! type -p jq > /dev/null; then jq::install; fi
+if ! type -p bat > /dev/null; then bat::install; fi
 if ! type -p ghead > /dev/null; then coreutils::install; fi
 
