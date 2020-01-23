@@ -1,6 +1,18 @@
 #!/usr/bin/env ksh
 # -*- coding: utf-8 -*-
 
+# bat::install - install bat show code
+function bat::install {
+    if ! type -p brew > /dev/null; then
+        message_warning "${FUNCTIONS_MESSAGE_BREW}"
+        return
+    fi
+    message_info "Install bat"
+    brew install bat
+    message_success "Installed bat"
+}
+
+
 function coreutils::install {
     if ! type -p brew > /dev/null; then
         message_warning "${FUNCTIONS_MESSAGE_BREW}"
