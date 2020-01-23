@@ -11,26 +11,20 @@
 FUNCTIONS_PLUGIN_DIR="$(dirname "${0}")"
 FUNCTIONS_SOURCE_PATH="${FUNCTIONS_PLUGIN_DIR}"/src
 
+export FUNCTIONS_MESSAGE_BREW="Please install brew or use antibody bundle luismayta/zsh-brew branch:develop"
+
 export PATH="${FUNCTIONS_PLUGIN_DIR}/bin:${PATH}"
 
-FUNCTIONS_MESSAGE_BREW="Please install brew or use antibody bundle luismayta/zsh-brew branch:develop"
 
 # shellcheck source=/dev/null
 source "${FUNCTIONS_SOURCE_PATH}"/base.zsh
 
+# shellcheck source=/dev/null
+source "${FUNCTIONS_SOURCE_PATH}"/utils.zsh
+
 # copy pub key to buffer
 function pubkey {
     more "${HOME}"/.ssh/id_rsa.pub | perl -pe 'chomp'  | pbcopy && message_info '====> Public key copied to pasteboard.'
-}
-
-# yarn::scripts show script of package.json
-function yarn::scripts {
-    cat package.json | jq -e .scripts
-}
-
-# yarn::dependencies show packages of package.json
-function yarn::dependencies {
-    cat package.json | jq -e .dependencies
 }
 
 # cross::os functions for osx and linux
