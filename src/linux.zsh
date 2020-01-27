@@ -8,19 +8,19 @@ function open {
 }
 
 function pbcopy {
-    if type -p xclip > /dev/null; then
+    if type xclip > /dev/null; then
         xclip -selection clipboard
     fi
-    if type -p xsel > /dev/null; then
+    if type xsel > /dev/null; then
         xsel --clipboard --input
     fi
 }
 
 function pbpaste {
-    if type -p xclip > /dev/null; then
+    if type xclip > /dev/null; then
         xclip -selection clipboard -o
     fi
-    if type -p xsel > /dev/null; then
+    if type xsel > /dev/null; then
         xsel --clipboard --output
     fi
 }
