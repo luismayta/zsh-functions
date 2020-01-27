@@ -12,7 +12,6 @@ function bat::install {
     message_success "Installed bat"
 }
 
-
 function coreutils::install {
     if ! type -p brew > /dev/null; then
         message_warning "${FUNCTIONS_MESSAGE_BREW}"
@@ -74,4 +73,3 @@ if ! type -p fzf > /dev/null; then fzf::install; fi
 if ! type -p jq > /dev/null; then jq::install; fi
 if ! type -p bat > /dev/null; then bat::install; fi
 if ! type -p ghead > /dev/null; then coreutils::install; fi
-
