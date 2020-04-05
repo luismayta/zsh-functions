@@ -1,8 +1,15 @@
 
-# Created by https://www.gitignore.io/api/python,node,bash
-# Edit at https://www.gitignore.io/?templates=python,node,bash
+# Created by https://www.gitignore.io/api/code,python,golang,node
+# Edit at https://www.gitignore.io/?templates=code,python,golang,node
 
-#!! ERROR: bash is undefined. Use list command to see defined gitignore types !!#
+### Code ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+#!! ERROR: golang is undefined. Use list command to see defined gitignore types !!#
 
 ### Node ###
 # Logs
@@ -82,9 +89,6 @@ typings/
 # nuxt.js build output
 .nuxt
 
-# react / gatsby 
-public/
-
 # vuepress build output
 .vuepress/dist
 
@@ -114,7 +118,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -201,16 +204,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# End of https://www.gitignore.io/api/python,node,bash
-
-# Created by https://www.gitignore.io/api/code
-# Edit at https://www.gitignore.io/?templates=code
-
-### Code ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
-# End of https://www.gitignore.io/api/code
+# End of https://www.gitignore.io/api/code,python,golang,node
