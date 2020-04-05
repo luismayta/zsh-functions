@@ -75,8 +75,10 @@ function falias {
 #   - Exit if there's no match (--exit-0)
 function fo {
     local file
-    read -r file <<<$(fzf-tmux --query="${1}" --multi --select-1 --exit-0 | fzf -0 | awk -F: '{print $1}')
-    [ -n "${file}" ] && "${EDITOR:-vim}" "${file[@]}"
+    read -r file <<<$(fzf-tmux --query="${1}" --exit-0 | awk -F: '{print $1}')
+    if [ -n "${file}" ]; then
+        vim "${file}"
+    fi
 }
 
 # fgb [FUZZY PATTERN] - Checkout specified branch
@@ -84,9 +86,9 @@ function fo {
 function fgb {
     local branches branch
     branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
-    branch=$(echo "${branches}" |
-            fzf-tmux -d $(( 2 + $(wc -l <<< "${branches}") )) +m) &&
-    git checkout $(echo "${branch}" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+        branch=$(echo "${branches}" |
+                     fzf-tmux -d $(( 2 + $(wc -l <<< "${branches}") )) +m) &&
+        git checkout $(echo "${branch}" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
 # ftm [SESSION_NAME | FUZZY PATTERN] - create new tmux session, or switch to existing one.
