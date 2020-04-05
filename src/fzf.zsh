@@ -122,3 +122,11 @@ function fgr {
         vim "+${line}" "${file}"
     fi
 }
+# fag fuzzy grep via ag and open in vim with line number
+function fag {
+    local file line
+    read -r file line <<<"$(ag --no-heading --line-number $@ | fzf -0 -1 | awk -F: '{print $1, $2}')"
+    if [ -n "${file}" ]; then
+        vim "+${line}" "${file}"
+    fi
+}
