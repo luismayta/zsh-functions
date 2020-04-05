@@ -116,11 +116,8 @@ function ftmk {
 
 # fgr fuzzy grep via rg and open in vim with line number
 function fgr {
-    local file
-    local line
-
+    local file line
     read -r file line <<<"$(rg --no-heading --line-number $@ | fzf -0 -1 | awk -F: '{print $1, $2}')"
-
     if [ -n "${file}" ]; then
         vim "+${line}" "${file}"
     fi
