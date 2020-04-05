@@ -22,7 +22,6 @@ function coreutils::install {
     message_success "Installed core utils"
 }
 
-
 # axel::install - install axel download manager
 function axel::install {
     if ! type -p brew > /dev/null; then
@@ -43,6 +42,17 @@ function jq::install {
     message_info "Install JQ"
     brew install jq
     message_success "Installed JQ"
+}
+
+# silver_search::install - install silver_search
+function silver_search::install {
+    if ! type -p brew > /dev/null; then
+        message_warning "${FUNCTIONS_MESSAGE_BREW}"
+        return
+    fi
+    message_info "Install silver search"
+    brew install the_silver_search
+    message_success "Installed silver search"
 }
 
 # ripgrep::install - install ripgrep
@@ -73,3 +83,4 @@ if ! type -p fzf > /dev/null; then fzf::install; fi
 if ! type -p jq > /dev/null; then jq::install; fi
 if ! type -p bat > /dev/null; then bat::install; fi
 if ! type -p ghead > /dev/null; then coreutils::install; fi
+if ! type -p ag > /dev/null; then silver_search::install; fi
