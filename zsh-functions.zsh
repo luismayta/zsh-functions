@@ -70,4 +70,9 @@ if type -p fzf > /dev/null; then
     source "${FUNCTIONS_SOURCE_PATH}"/fzf.zsh
 fi
 
+if type -p ag > /dev/null; then
+    # shellcheck source=/dev/null
+    source "${FUNCTIONS_SOURCE_PATH}"/ag.zsh
+fi
+
 cross::os
