@@ -18,7 +18,10 @@ else
 endif
 
 TEAM := private
+REPOSITORY_DOMAIN:=github.com
+REPOSITORY_OWNER:=luismayta
 AWS_VAULT ?= luismayta
+KEYBASE_OWNER ?= luismayta
 PROJECT := zsh-functions
 PROJECT_PORT := 3000
 
@@ -36,7 +39,7 @@ SOURCE_DIR=$(ROOT_DIR)/
 PROVISION_DIR:=$(ROOT_DIR)/provision
 FILE_README:=$(ROOT_DIR)/README.rst
 KEYBASE_VOLUME_PATH ?= /Keybase
-KEYBASE_PATH ?= ${KEYBASE_VOLUME_PATH}/${TEAM}/${AWS_VAULT}/projects/${PROJECT}
+KEYBASE_PATH ?= ${KEYBASE_VOLUME_PATH}/${TEAM}/${KEYBASE_OWNER}/${REPOSITORY_DOMAIN}/${REPOSITORY_OWNER}/${PROJECT}
 
 PATH_DOCKER_COMPOSE:=docker-compose.yml -f provision/docker-compose
 
