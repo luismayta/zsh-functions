@@ -15,6 +15,8 @@ export FUNCTIONS_MESSAGE_BREW="Please install brew or use antibody bundle luisma
 
 export PATH="${FUNCTIONS_PLUGIN_DIR}/bin:${PATH}"
 
+# shellcheck source=/dev/null
+source "${FUNCTIONS_SOURCE_PATH}"/async.zsh
 
 # shellcheck source=/dev/null
 source "${FUNCTIONS_SOURCE_PATH}"/base.zsh
@@ -31,10 +33,14 @@ function pubkey {
 function cross::os {
 
     case "${OSTYPE}" in
-    linux*)
-        # shellcheck source=/dev/null
-        source "${FUNCTIONS_SOURCE_PATH}"/linux.zsh
-    ;;
+        darwin*)
+            # shellcheck source=/dev/null
+            source "${FUNCTIONS_SOURCE_PATH}"/darwin.zsh
+            ;;
+        linux*)
+            # shellcheck source=/dev/null
+            source "${FUNCTIONS_SOURCE_PATH}"/linux.zsh
+            ;;
     esac
 
 }
