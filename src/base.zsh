@@ -51,7 +51,7 @@ function silver_search::install {
         return
     fi
     message_info "Install silver search"
-    brew install the_silver_search
+    brew install the_silver_searcher
     message_success "Installed silver search"
 }
 
