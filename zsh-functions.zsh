@@ -53,10 +53,9 @@ function download {
     axel -n 20 -av "${filename}"
 }
 
-if type -p rg > /dev/null; then
-    # Setting rg as the default source for fzf
-    export FZF_DEFAULT_COMMAND='rg --files'
-
+if type -p fd > /dev/null; then
+    # Setting fd as the default source for fzf
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
     # Apply the command to CTRL-T as well
     export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 fi
@@ -80,5 +79,8 @@ if type -p ag > /dev/null; then
     # shellcheck source=/dev/null
     source "${FUNCTIONS_SOURCE_PATH}"/ag.zsh
 fi
+
+# shellcheck source=/dev/null
+source "${FUNCTIONS_SOURCE_PATH}"/fd.zsh
 
 cross::os
