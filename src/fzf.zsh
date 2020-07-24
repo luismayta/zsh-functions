@@ -75,7 +75,7 @@ function falias {
 #   - Exit if there's no match (--exit-0)
 function fo {
     local file
-    read -r file <<<$(fzf-tmux --query="${1}" --exit-0 | awk -F: '{print $1}')
+    file=$(fzf-tmux | awk -F: '{print $1}')
     if [ -n "${file}" ]; then
         ${EDITOR} "${file}"
     fi
