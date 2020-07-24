@@ -10,12 +10,12 @@ function functions::async::completed::callback {
 }
 
 function functions::async::init {
-    if ! type async_init > /dev/null; then
+    if ! type -p async_init > /dev/null; then
         return
     fi
     async_init
     # Start a worker that will report job completion
-    async_start_worker "${FUNCTIONS_ASYNC_NAME}" -u
+    async_start_worker "${FUNCTIONS_ASYNC_NAME}" -n
     async_register_callback "${FUNCTIONS_ASYNC_NAME}" functions::async::completed::callback
 }
 
