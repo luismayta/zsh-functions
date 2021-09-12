@@ -18,7 +18,8 @@ function fkill {
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
 function fa {
-    # fa <dir> - Search dirs and cd to them - TODO: ignore node_modules + other things
+    # fa <dir> - Search dirs and cd to them
+    # TODO 129: ignore node_modules + other things
     local dir
     dir=$(find "${1:-.}" -path '*/\.*' -prune \
                -o -type d -print 2> /dev/null | fzf +m) &&
